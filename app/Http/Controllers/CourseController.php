@@ -15,6 +15,7 @@ class CourseController extends Controller
     }
     public function save(Request $request){
         $files = [];
+       //echo"<pre>";print_r($request->content); exit;
         if($request->hasfile('image'))
          {
             foreach($request->file('image') as $file)
@@ -25,9 +26,11 @@ class CourseController extends Controller
             }
          }
 
-
        $Course  = Course::create(['course_name'=>$request->course_name,'image'=>json_encode($files)]);
-       echo "yes";
+       foreach($request->content as $content){
+        CourseDetails::create(['course_id'=>$Course->id,'content'=>$content]);
+       }
+
     }
     public function addCourses(){
      return view('add');

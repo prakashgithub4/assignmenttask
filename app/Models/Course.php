@@ -10,6 +10,6 @@ class Course extends Model
     use HasFactory;
     protected $fillable = ['course_name','image'];
     public function courseDetails(){
-        return $this->hasOne(CourseDetails::class,'course_id','id');
+        return $this->hasMany(CourseDetails::class,'course_id','id');
     }
 }
